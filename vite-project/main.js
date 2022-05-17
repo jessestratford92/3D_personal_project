@@ -74,9 +74,9 @@ const planeGeometry = new THREE.PlaneGeometry
 (10, 10, 10, 10)
 const planeMaterial = new THREE.
   MeshPhongMaterial ({
-  color: 0xffff00,
   side: THREE.DoubleSide,
-  flatShading: THREE.FlatShading
+  flatShading: THREE.FlatShading,
+  vertexColors: true,
 })
 const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial)
 scene.add(planeMesh)
@@ -94,6 +94,15 @@ for (let i = 0; i < array.length; i += 3 ) {
 
 console.log(array[i])
 }
+
+const colors = []
+for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++){
+colors.push (1, 0, 0)
+}
+
+planeMesh.geometry.setAttribute('color',
+    new THREE.BufferAttribute(new Float32Array(colors), 3)
+    )
 
 const light = new THREE.DirectionalLight(
   0xffffff, 1
@@ -122,7 +131,11 @@ function animate () {
   raycaster.setFromCamera(mouse, camera)
   const intersects = raycaster.intersectObject(planeMesh)
   if (intersects.length > 0 ) {
-    console.log ('intersecting')
+    // console.log ('intersecting')
+    intersects[0].object.geometry.attributes.color.setX(intersects[0].face.a, 0)
+    intersects[0].object.geometry.attributes.color.setX(intersects[0].face.b, 0)
+    intersects[0].object.geometry.attributes.color.setX(intersects[0].face.c, 0)
+    intersects[0].object.geometry.attributes.color.needsUpdate = true
   }
 }
 
