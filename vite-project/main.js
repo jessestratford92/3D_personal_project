@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import * as dat from 'dat.gui';
-console.log(dat)
+import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls'
+console.log(OrbitControls)
 import { BoxGeometry, FlatShading } from 'three';
 
 const gui = new dat.GUI()
@@ -8,47 +9,47 @@ const world = {
   plane: {
     width: 10,
     height: 10,
+    widthSegments: 10,
+    heightSegments: 10
   }
 }
-gui.add(world.plane, 'width', 1, 20)
-  .onChange (() => {
-    planeMesh.geometry.dispose()
-    planeMesh.geometry = new THREE.PlaneGeometry
-    (world.plane.width, world.plane.height, 10, 10)
 
-    const { array } = planeMesh.geometry.attributes.position
-
-    for (let i = 0; i < array.length; i += 3 ) {
-      const x = array[i]
-      const y = array[i + 1]
-      const z = array[i + 2]
-
-    array[i + 2] = z + Math.random()
-
-    console.log(array[i])
-}
-
-  })
+  gui.add(world.plane, 'width', 1, 20)
+  .onChange (generatePlane)
 
   gui.add(world.plane, 'height', 1, 20)
-  .onChange (() => {
-    planeMesh.geometry.dispose()
-    planeMesh.geometry = new THREE.PlaneGeometry
-    (world.plane.width, world.plane.height, 10, 10)
+  .onChange (generatePlane)
 
-    const { array } = planeMesh.geometry.attributes.position
+  gui.add(world.plane, 'widthSegments', 1, 50)
+  .onChange (generatePlane)
 
-    for (let i = 0; i < array.length; i += 3 ) {
-      const x = array[i]
-      const y = array[i + 1]
-      const z = array[i + 2]
+  gui.add(world.plane, 'heightSegments', 1, 50)
+  .onChange (generatePlane)
 
-    array[i + 2] = z + Math.random()
+  function generatePlane () {
 
-    console.log(array[i])
+  planeMesh.geometry.dispose()
+  planeMesh.geometry = new THREE.PlaneGeometry
+  ( 
+    world.plane.width, 
+    world.plane.height,
+    world.plane.widthSegments,
+    world.plane.heightSegments,
+  )
+
+  const { array } = planeMesh.geometry.attributes.position
+
+  for (let i = 0; i < array.length; i += 3 ) {
+    const x = array[i]
+    const y = array[i + 1]
+    const z = array[i + 2]
+
+  array[i + 2] = z + Math.random()
+
+  console.log(array[i])
 }
 
-  })
+}
 
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(
@@ -64,6 +65,8 @@ renderer.setSize(innerWidth, innerHeight)
 renderer.setPixelRatio(devicePixelRatio)
 document.body.appendChild(renderer.domElement)
 
+new OrbitControls (camera, renderer.domElement)
+console.log(OrbitControls)
 camera.position.z = 5
 
 const planeGeometry = new THREE.PlaneGeometry
@@ -96,6 +99,12 @@ const light = new THREE.DirectionalLight(
 )
 light.position.set(0, 0, 1 )
 scene.add(light)
+
+const backlight = new THREE.DirectionalLight(
+  0xffffff, 1
+)
+backlight.position.set(0, 0, -1 )
+scene.add(backlight)
 
 
 function animate () {
