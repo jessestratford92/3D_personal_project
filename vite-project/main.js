@@ -51,6 +51,7 @@ const world = {
 
 }
 
+const raycaster = new THREE.Raycaster()
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -107,18 +108,25 @@ backlight.position.set(0, 0, -1 )
 scene.add(backlight)
 
 
-function animate () {
-  requestAnimationFrame(animate)
-  renderer.render(scene, camera)
-  // planeMesh.rotation.x += 0.01
-}
-
-animate ()
-
 const mouse = {
   x: undefined,
   y: undefined,
 }
+
+
+function animate () {
+  requestAnimationFrame(animate)
+  renderer.render(scene, camera)
+  // planeMesh.rotation.x += 0.01
+
+  raycaster.setFromCamera(mouse, camera)
+  const intersects = raycaster.intersectObject(planeMesh)
+  if (intersects.length > 0 ) {
+    console.log ('intersecting')
+  }
+}
+
+animate ()
 
 addEventListener ('mousemove', (event) => {
     mouse.x = (event.clientX / innerWidth) * 2-1
