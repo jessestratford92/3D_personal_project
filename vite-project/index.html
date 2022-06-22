@@ -5,27 +5,29 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bellefair&family=Cormorant+Garamond:wght@300&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <style>
 
       body {
         margin: 0,
       }
-      .absolute {
-        position: absolute;
-      }
 
-      .text-white {
-        color: white;
+      .font-bangers {
+        font-family: 'Bangers', cursive;
+        font-family: 'Bellefair', serif;
+        font-family: 'Cormorant Garamond', serif;
       }
-
+       
     </style>
   </head>
   <body>
     <div id="app">
-      <div class="absolute text-white">
-        <h1>Jesse Stratford</h1>
-        <p>Creative Web Developer / Software Engineer</p>
-        <button>View Work</button>
+      <div class="absolute text-white text-center"
+      style= "top: 50%; transform: translate (-50%, -50%); left: 50%;">
+        <h1 class="font-bangers">Jesse Stratford</h1>
+        <p class="font-bangers">Creative Web Developer / Software Engineer</p>
+        <button class="font-bangers">View Work</button>
       </div>
     </div>
     <script type="module" src="/main.js"></script>
