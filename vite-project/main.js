@@ -7,8 +7,8 @@ import { BoxGeometry, FlatShading } from 'three';
 const gui = new dat.GUI()
 const world = {
   plane: {
-    width: 400,
-    height: 400,
+    width: 500,
+    height: 500,
     widthSegments: 50,
     heightSegments: 50
   }
@@ -37,9 +37,9 @@ function generatePlane() {
       const y = array[i + 1]
       const z = array[i + 2]
 
-      array[i] = x + (Math.random() - 0.5) * 3
-      array[i + 1] = y + (Math.random() - 0.5) * 3
-      array[i + 2] = z + (Math.random() - 0.5) * 3
+      array[i] = x + (Math.random() - 0.5) * 5
+      array[i + 1] = y + (Math.random() - 0.5) * 5
+      array[i + 2] = z + (Math.random() - 0.5) * 5
     }
 
     randomValues.push(Math.random() * Math.PI * 2)
@@ -75,7 +75,7 @@ renderer.setPixelRatio(devicePixelRatio)
 document.body.appendChild(renderer.domElement)
 
 new OrbitControls(camera, renderer.domElement)
-camera.position.z = 5
+camera.position.z = 50
 
 const planeGeometry = new THREE.PlaneGeometry(
   world.plane.width,
