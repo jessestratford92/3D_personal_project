@@ -1,1 +1,0 @@
-# 3D_personal_project

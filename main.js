@@ -14,7 +14,6 @@ const world = {
   }
 }
 gui.add(world.plane, 'width', 1, 500).onChange(generatePlane)
-
 gui.add(world.plane, 'height', 1, 500).onChange(generatePlane)
 gui.add(world.plane, 'widthSegments', 1, 100).onChange(generatePlane)
 gui.add(world.plane, 'heightSegments', 1, 100).onChange(generatePlane)
@@ -25,7 +24,7 @@ function generatePlane() {
     world.plane.width,
     world.plane.height,
     world.plane.widthSegments,
-    world.plane.heightSegments
+    world.plane.heightSegments,
   )
 
 // create an AudioListener and add it to the camera
@@ -43,6 +42,13 @@ audioLoader.load('sounds/opening.mp3', function( buffer ) {
 	sound.setVolume(0.5);
 	sound.play();
 });
+
+// create an AudioAnalyser, passing in the sound and desired fftSize
+const analyser = new THREE.AudioAnalyser( sound, 32 );
+
+// get the average frequency of the sound
+const data = analyser.getAverageFrequency();
+
 
   // vertice position randomization
   const { array } = planeMesh.geometry.attributes.position
@@ -67,7 +73,7 @@ audioLoader.load('sounds/opening.mp3', function( buffer ) {
 
   const colors = []
   for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
-    colors.push(0, 0.19, 0.4)
+    colors.push(0, 0, 0)
   }
 
   planeMesh.geometry.setAttribute(
@@ -149,32 +155,32 @@ function animate() {
     const { color } = intersects[0].object.geometry.attributes
 
     // vertice 1
-    color.setX(intersects[0].face.a, 0.1)
-    color.setY(intersects[0].face.a, 0.5)
-    color.setZ(intersects[0].face.a, 1)
+    color.setX(intersects[0].face.a, 0)
+    color.setY(intersects[0].face.a, 0)
+    color.setZ(intersects[0].face.a, 0)
 
     // vertice 2
-    color.setX(intersects[0].face.b, 0.1)
-    color.setY(intersects[0].face.b, 0.5)
-    color.setZ(intersects[0].face.b, 1)
+    color.setX(intersects[0].face.b, 0)
+    color.setY(intersects[0].face.b, 0)
+    color.setZ(intersects[0].face.b, 0)
 
     // vertice 3
-    color.setX(intersects[0].face.c, 0.1)
-    color.setY(intersects[0].face.c, 0.5)
-    color.setZ(intersects[0].face.c, 1)
+    color.setX(intersects[0].face.c, 0)
+    color.setY(intersects[0].face.c, 0)
+    color.setZ(intersects[0].face.c, 0)
 
     intersects[0].object.geometry.attributes.color.needsUpdate = true
 
     const initialColor = {
       r: 0,
-      g: 0.19,
-      b: 0.4
+      g: 0,
+      b: 0
     }
 
     const hoverColor = {
-      r: 0.1,
-      g: 0.5,
-      b: 1
+      r: 0,
+      g: 0,
+      b: 0,
     }
 
     gsap.to(hoverColor, {
