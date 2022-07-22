@@ -1,5 +1,5 @@
-import * as THREE from '../three';
-import * as dat from '../dat.gui';
+import * as THREE from 'https://threejs.org/build/three.module.js';
+import * as dat from 'https://threejs.org/examples/jsm/libs/dat.gui.module.js';
 import gsap from '../gsap';
 import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls'
 import { BoxGeometry, FlatShading } from './three';
