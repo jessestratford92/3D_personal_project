@@ -1,6 +1,6 @@
-import * as THREE from './three';
-import * as dat from './dat.gui';
-import gsap from './gsap';
+import * as THREE from 'https://unpkg.com/three@0.142.0/build/three.js';
+import * as dat from 'dat.gui';
+import gsap from 'gsap';
 import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls'
 import { BoxGeometry, FlatShading } from './three';
 
