@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import * as dat from 'https://cdn.jsdelivr.net/npm/dat.gui@0.7.9/build/dat.gui.module.js';
-import gsap from 'gsap/all';
+import gsap from 'gsap';
 import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls';
 
 /** @format */
