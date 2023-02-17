@@ -4,6 +4,12 @@
   margin: 0;
   padding: 0;
 }
+
+app {
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
 .font-bangers {
   font-family: 'Bangers', cursive;
   font-family: 'Bellefair', serif;
