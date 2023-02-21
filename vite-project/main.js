@@ -217,9 +217,9 @@ function animate() {
     }
 
     const hoverColor = {
-      r: 0,
-      g: 0,
-      b: 0,
+      r: 0.3,
+      g: 0.3,
+      b: 0.3,
     }
 
     gsap.to(hoverColor, {
